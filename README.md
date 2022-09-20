@@ -1,6 +1,4 @@
-# iOS-ImageFeed-Public
-
-# Image Feed
+# iOS ImageFeed
 
 # Ссылки
 
