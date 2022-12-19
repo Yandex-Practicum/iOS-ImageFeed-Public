@@ -150,4 +150,4 @@
 2. Лента реализована с помощью UITableView.
 3. В приложении использованы UImageView, UIButton, UILabel, TabBarController, NavigationController, NavigationBar, UITableView, UITableViewCell.
 4. Приложение должно поддерживать устройства iPhone с iOS 13 или выше, предусмотрен только портретный режим.
-5, Все шрифты в приложении должны быть выбраны из множества стандартных для платформы (для iOS 13 - это [SF Pro](https://developer.apple.com/fonts/)).
+5. Все шрифты в приложении должны быть выбраны из множества стандартных для платформы (для iOS 13 - это [SF Pro](https://developer.apple.com/fonts/)).
