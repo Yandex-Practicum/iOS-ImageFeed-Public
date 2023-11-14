@@ -176,7 +176,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="ci0-5T-iNU"/>
-                        <color key="backgroundColor" name="YP Background (iOS)"/>
+                        <color key="backgroundColor" name="YP Black (IOS)"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="tab_profile_active" id="j53-D4-byl"/>
                 </viewController>
@@ -198,8 +198,8 @@
                         </tabBarAppearance>
                     </tabBar>
                     <connections>
-                        <segue destination="Meg-nR-Jte" kind="relationship" relationship="viewControllers" id="3Ah-V1-6aB"/>
                         <segue destination="f9k-9Y-i2x" kind="relationship" relationship="viewControllers" id="SIx-ba-hE7"/>
+                        <segue destination="Meg-nR-Jte" kind="relationship" relationship="viewControllers" id="N81-Iq-JhT"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mnz-T4-tal" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
