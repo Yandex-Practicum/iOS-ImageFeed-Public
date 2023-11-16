@@ -4,7 +4,7 @@
 //
 //  Created by Никита Гончаров on 11.11.2023.
 //
-
+import Foundation
 import UIKit
 
 final class SingleImageViewController: UIViewController {
@@ -25,7 +25,10 @@ final class SingleImageViewController: UIViewController {
     }
     
     @IBAction func didTapShareButton(_ sender: Any) {
-        let shareButton = UIActivityViewController(activityItems: [image!], applicationActivities: [])
+        let shareButton = UIActivityViewController(
+            activityItems: [image!],
+            applicationActivities: []
+        )
         present(shareButton, animated: true, completion: nil)
     }
     

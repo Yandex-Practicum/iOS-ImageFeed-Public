@@ -5,30 +5,14 @@
 //
 import UIKit
 
-final class ImagesListViewController: UIViewController {
+ class ImagesListViewController: UIViewController {
 
-    private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
-    
     @IBOutlet private var tableView: UITableView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == ShowSingleImageSegueIdentifier {
-            let viewController = segue.destination as! SingleImageViewController
-            let indexPath = sender as! IndexPath
-            let imageName = photosName[indexPath.row]
-            let image = UIImage(named: "\(imageName)_full_size") ?? UIImage(named: imageName)
-            viewController.image = image
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
-    }
     
     private let photosName: [String] = Array(0..<20).map{ "\($0)" }
+    
+    private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
     
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -36,7 +20,23 @@ final class ImagesListViewController: UIViewController {
         formatter.timeStyle = .none
         return formatter
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == ShowSingleImageSegueIdentifier {
+            let viewController = segue.destination as! SingleImageViewController
+            let indexPath = sender as! IndexPath
+            let image = UIImage(named: photosName[indexPath.row])
+            viewController.image = image
+        } else {
+            super.prepare(for: segue, sender: sender)
+        }
+    }
 }
+
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return photosName.count
