@@ -4,7 +4,7 @@
 //
 //  Created by Никита Гончаров on 11.11.2023.
 //
-import Foundation
+
 import UIKit
 
 final class SingleImageViewController: UIViewController {
