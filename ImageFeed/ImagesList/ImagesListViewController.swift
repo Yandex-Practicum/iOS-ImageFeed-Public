@@ -51,7 +51,6 @@ class ImagesListViewController: UIViewController {
         } else {
             cell.likeButton.imageView?.image = UIImage(named: "like_button_off")
         }
-        
     }
 }
     extension ImagesListViewController: UITableViewDataSource {
@@ -66,6 +65,7 @@ class ImagesListViewController: UIViewController {
                 return UITableViewCell()
             }
             
+            cell.selectionStyle = .none
             configCell(for: imageListCell, with: indexPath) // 3
             
             return imageListCell // 4
@@ -74,7 +74,7 @@ class ImagesListViewController: UIViewController {
     
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        performSegue(withIdentifier: "ShowSingleImage", sender: indexPath)
+        performSegue(withIdentifier: ShowSingleImageSegueIdentifier, sender: indexPath)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

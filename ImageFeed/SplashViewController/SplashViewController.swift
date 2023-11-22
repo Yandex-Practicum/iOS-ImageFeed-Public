@@ -66,13 +66,12 @@ extension SplashViewController: AuthViewControllerDelegate {
                     OAuth2TokenStorage().token = accessToken
                     self.profileService.fetchProfile(accessToken)
                     self.profileImageService.fetchProfileImageURL(username: self.profileService.getProfile()?.username ?? "") { result in
+                        UIBlockingProgressHUD.dismiss()
                         switch result {
                         case .failure(_):
-                            UIBlockingProgressHUD.dismiss()
                             self.dismiss(animated: false)
                             self.showAlert()
                         case .success(_):
-                            UIBlockingProgressHUD.dismiss()
                             self.switchToTabBarController()
                         }
                     }
