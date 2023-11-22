@@ -49,7 +49,7 @@ final class ProfileService {
         var request = URLRequest(url: url)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
-        let task = URLSession.shared.objectTask(for: request) { (result: Result<ProfileResult, Error>) in
+        let task = URLSession.shared.objectTask(for: request) {  (result: Result<ProfileResult, Error>) in
             switch result {
             case .success(let profileResult):
                 let profile = Profile(username: profileResult.username, name: "\(profileResult.firstName) \(profileResult.lastName ?? "")", loginName: "@\(profileResult.username)", bio: profileResult.bio ?? "")
@@ -61,7 +61,6 @@ final class ProfileService {
         task.resume()
     }
 }
-
 struct ProfileResult: Codable {
     let username: String
     let firstName: String

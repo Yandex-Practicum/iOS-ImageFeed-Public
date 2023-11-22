@@ -59,7 +59,10 @@ class SplashViewController: UIViewController {
 extension SplashViewController: AuthViewControllerDelegate {
     func acceptToken(code: String) {
         UIBlockingProgressHUD.show()
-        OAuth2Service().fetchAuthToken(code) { result in
+        OAuth2Service().fetchAuthToken(code) { [weak self ] result in
+            guard let self = self else {
+                print("self потерян в acceptToken")
+                return }
             DispatchQueue.main.async {
                 switch result {
                 case .success(let accessToken):
