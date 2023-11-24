@@ -12,6 +12,8 @@ class SplashViewController: UIViewController {
     private var profileService = ProfileService.shared
     private var profileImageService = ProfileImageService.shared
     
+    // MARK: - UIViewController
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -27,7 +29,8 @@ class SplashViewController: UIViewController {
         
         if let token = OAuth2TokenStorage().token {
             self.profileService.fetchProfile(token)
-            self.profileImageService.fetchProfileImageURL(username: profileService.getProfile()?.username ?? "") { result in
+            self.profileImageService.fetchProfileImageURL(username: profileService.getProfile()?.username ?? "") { [weak self] result in
+                guard let self = self else { return }
                 switch result {
                 case .failure(_):
                     DispatchQueue.main.async {
@@ -55,7 +58,7 @@ class SplashViewController: UIViewController {
         window.rootViewController = tabBarController
     }
 }
-
+// MARK: - AuthViewControllerDelegate
 extension SplashViewController: AuthViewControllerDelegate {
     func acceptToken(code: String) {
         UIBlockingProgressHUD.show()
@@ -69,13 +72,12 @@ extension SplashViewController: AuthViewControllerDelegate {
                     OAuth2TokenStorage().token = accessToken
                     self.profileService.fetchProfile(accessToken)
                     self.profileImageService.fetchProfileImageURL(username: self.profileService.getProfile()?.username ?? "") { result in
+                        UIBlockingProgressHUD.dismiss()
                         switch result {
                         case .failure(_):
-                            UIBlockingProgressHUD.dismiss()
                             self.dismiss(animated: false)
                             self.showAlert()
                         case .success(_):
-                            UIBlockingProgressHUD.dismiss()
                             self.switchToTabBarController()
                         }
                     }
@@ -105,7 +107,7 @@ extension SplashViewController {
     }
     
     func splashScreenLogo() -> UIImageView {
-        let splashScreenLogo = UIImageView(image: UIImage(named: "Logo_of_Unsplash"))
+        let splashScreenLogo = UIImageView(image: UIImage(named: "logo_of_unsplash"))
         view.addSubview(splashScreenLogo)
         splashScreenLogo.translatesAutoresizingMaskIntoConstraints = false
         

@@ -23,15 +23,16 @@ class OAuth2Service {
         
         let request = makeRequest(code)
         let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<OAuthTokenResponseBody, Error>) in
+            guard let self = self else { return }
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):
                     completion(.success(response.accessToken))
                 case .failure(let error):
                     completion(.failure(error))
-                    self?.lastCode = nil
+                    self.lastCode = nil
                 }
-                self?.currentTask = nil
+                self.currentTask = nil
             }
         }
         currentTask = task
