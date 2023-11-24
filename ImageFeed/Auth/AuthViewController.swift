@@ -7,8 +7,8 @@
 import UIKit
 import ProgressHUD
 
-class AuthViewController: UIViewController {
-    let showWebViewIdentifier = "ShowWebView"
+final class AuthViewController: UIViewController {
+    private let showWebViewIdentifier = "ShowWebView"
     weak var delegate: AuthViewControllerDelegate?
     
     override func viewDidLoad() {
@@ -23,6 +23,10 @@ class AuthViewController: UIViewController {
                 unwrappedView.delegate = self
             }
         }
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
     }
 }
 

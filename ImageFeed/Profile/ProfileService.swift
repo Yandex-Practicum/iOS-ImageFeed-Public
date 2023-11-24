@@ -11,13 +11,14 @@ final class ProfileService {
     
     static let shared = ProfileService()
     static let didChangeNotification = Notification.Name(rawValue: "ProfileProviderDidChange")
-    private var profile: Profile?
+    private (set) var profile: Profile?
     private var lastToken: String?
     private let lock = NSLock()
     private let semaphore = DispatchSemaphore(value: 0)
     
     func fetchProfile(_ token: String) {
-        self.fetchProfile(token) { result in
+        self.fetchProfile(token) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let profile):
                 self.profile = profile

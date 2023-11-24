@@ -10,12 +10,17 @@ import UIKit
 final class ImagesListService {
     
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
-    
-    private (set) var photos: [Photo] = [] // тут храним список уже скачанных фотографий
-    private var lastLoadedPage: Int? = nil // тут будем хранить номер последней скачанной страницы
+    static let shared = ImagesListService()
+    private (set) var photos: [Photo] = []
+    // тут храним список уже скачанных фотографий
+    private var lastLoadedPage: Int? = nil
+    // тут будем хранить номер последней скачанной страницы
     private var isFetching = false
     private var currentPage = 1
     private let itemsPerPage = 10
+    private let dateFormatter = ISO8601DateFormatter()
+    
+    var nextPage: Int = 1
     
     func fetchPhotosNextPage() {
         guard !isFetching else { return }
@@ -105,6 +110,7 @@ final class ImagesListService {
         
         task.resume()
     }
+    
     
     private func dateFromString(_ dateString: String) -> Date? {
         let dateFormatter = ISO8601DateFormatter()

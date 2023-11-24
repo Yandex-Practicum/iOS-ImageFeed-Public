@@ -19,13 +19,14 @@ final class ProfileImageService {
         var request = URLRequest(url: url)
         request.setValue("Bearer \(OAuth2TokenStorage().token ?? "")", forHTTPHeaderField: "Authorization")
         let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<UserResult, Error>) in
+            guard let self =  self else { return }
             DispatchQueue.main.async {
                 switch result {
                 case .success(let userResult):
                     let avatarURLPath = userResult.profileImage.large.absoluteString
                     let avatarURL = URL(string: avatarURLPath)!
-                    self?.avatar.kf.indicatorType = .activity
-                    self?.avatar.kf.setImage(with: avatarURL,
+                    self.avatar.kf.indicatorType = .activity
+                    self.avatar.kf.setImage(with: avatarURL,
                                             placeholder: UIImage(named: "placeholder"),
                                             options: [.processor(RoundCornerImageProcessor(radius: Radius.heightFraction(0.5))),
                                                       .scaleFactor(UIScreen.main.scale),

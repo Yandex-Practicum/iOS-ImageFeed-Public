@@ -150,8 +150,8 @@
 			isa = PBXGroup;
 			children = (
 				4B79045E2B042DC8008FE1CD /* AuthViewController.swift */,
-				4B7904612B043435008FE1CD /* WebViewViewController.swift */,
 				4B01BECE2B0959E800A46A4C /* UIBlockingProgressHUD.swift */,
+				4B7904612B043435008FE1CD /* WebViewViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
