@@ -11,7 +11,7 @@ class SplashViewController: UIViewController {
     
     private var profileService = ProfileService.shared
     private var profileImageService = ProfileImageService.shared
-    
+    private var oauthService = OAuth2Service()
     // MARK: - UIViewController
     
     override func viewDidLoad() {
@@ -62,7 +62,7 @@ class SplashViewController: UIViewController {
 extension SplashViewController: AuthViewControllerDelegate {
     func acceptToken(code: String) {
         UIBlockingProgressHUD.show()
-        OAuth2Service().fetchAuthToken(code) { [weak self ] result in
+        oauthService.fetchAuthToken(code) { [weak self ] result in
             guard let self = self else {
                 print("self потерян в acceptToken")
                 return }

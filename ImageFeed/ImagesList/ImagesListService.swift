@@ -18,7 +18,10 @@ final class ImagesListService {
     private var isFetching = false
     private var currentPage = 1
     private let itemsPerPage = 10
-    private let dateFormatter = ISO8601DateFormatter()
+    private let dateFormatter: ISO8601DateFormatter = {
+        let dateFormatter = ISO8601DateFormatter()
+        return dateFormatter
+    }()
     
     var nextPage: Int = 1
     

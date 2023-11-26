@@ -11,7 +11,6 @@ import Kingfisher
 final class SingleImageViewController: UIViewController {
     var image: UIImage! {
         didSet {
-            guard let image = image else { return }
             guard isViewLoaded else { return } // 1
             imageView.image = image // 2
             rescaleAndCenterImageInScrollView(image: image)
@@ -32,15 +31,29 @@ final class SingleImageViewController: UIViewController {
     }
     
     @IBAction func didTapShareButton(_ sender: Any) {
-        guard let image = image else { return }
-        let shareButton = UIActivityViewController(activityItems: [image], applicationActivities: [])
+        let shareButton = UIActivityViewController(activityItems: [image!], applicationActivities: [])
         present(shareButton, animated: true, completion: nil)
     }
     // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadFullImage()
+        
+        if let imageUrl = fullImageUrl, let url = URL(string: imageUrl) {
+            UIBlockingProgressHUD.show()
+            imageView.kf.setImage(with: url) { [weak self] result in
+                UIBlockingProgressHUD.dismiss()
+                
+                guard let self = self else { return }
+                switch result {
+                case .success(let imageResult):
+                    self.image = imageResult.image
+                case .failure:
+                    self.showError()
+                }
+            }
+        }
+        
         scrollView.minimumZoomScale = 0.1
         scrollView.maximumZoomScale = 1.25
     }
@@ -85,7 +98,7 @@ final class SingleImageViewController: UIViewController {
                 guard let self = self else { return }
                 switch result {
                 case .success(let imageResult):
-                    self.image = imageResult.image
+                    self.rescaleAndCenterImageInScrollView(image: imageResult.image)
                 case .failure:
                     self.showError()
                 }

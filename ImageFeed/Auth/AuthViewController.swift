@@ -15,6 +15,10 @@ final class AuthViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+             .lightContent
+         }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if segue.identifier == "ShowWebView" {
@@ -24,22 +28,17 @@ final class AuthViewController: UIViewController {
             }
         }
     }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        .lightContent
-    }
 }
-
-extension AuthViewController: WebViewViewControllerDelegate {
-    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        delegate?.acceptToken(code: code)
+    extension AuthViewController: WebViewViewControllerDelegate {
+        func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
+            delegate?.acceptToken(code: code)
+        }
+        
+        func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
+            dismiss(animated: true)
+        }
     }
     
-    func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
-        dismiss(animated: true)
+    protocol AuthViewControllerDelegate: AnyObject {
+        func acceptToken(code: String)
     }
-}
-
-protocol AuthViewControllerDelegate: AnyObject {
-    func acceptToken(code: String)
-}

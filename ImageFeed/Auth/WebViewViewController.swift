@@ -50,6 +50,7 @@ final class WebViewViewController: UIViewController {
         
         let request = URLRequest(url: url)
         webView.load(request)
+        updateProgress()
     }
     
     private func updateProgress() {
@@ -71,7 +72,7 @@ extension WebViewViewController: WKNavigationDelegate {
             decisionHandler(.allow)
         }
     }
-
+    
     private func code(from navigationAction: WKNavigationAction) -> String? {
         if
             let url = navigationAction.request.url,
@@ -86,4 +87,3 @@ extension WebViewViewController: WKNavigationDelegate {
         }
     }
 }
-
