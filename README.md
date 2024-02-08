@@ -2,7 +2,7 @@
 
 # Ссылки
 
-- [Дизайн в Figma](https://tinyurl.com/image-feed-figma)
+- [Дизайн в Figma](https://clck.ru/38ddGT)
 - [Unsplash API](https://unsplash.com/documentation)
 
 # Назначение и цели приложения
