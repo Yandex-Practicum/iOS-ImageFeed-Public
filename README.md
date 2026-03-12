@@ -29,8 +29,8 @@
 1. Авторизация работает через OAuth Unsplash и POST запрос для получения Auth Token.
 2. Лента реализована с помощью UITableView.
 3. В приложении использованы UImageView, UIButton, UILabel, TabBarController, NavigationController, NavigationBar, UITableView, UITableViewCell.
-4. Приложение должно поддерживать устройства iPhone с iOS 13 или выше, предусмотрен только портретный режим.
-5. Все шрифты в приложении — системные, не нужно их скачивать; в Interface Builder это шрифт «System» в выпадающем списке, а при вёрстке из кода — [`systemFont(ofSize:weight:)`](https://developer.apple.com/documentation/uikit/uifont/1619027-systemfont). В текущих версиях iOS (13—16) системный шрифт — это шрифт `SF Pro`, но в будущих версиях он может поменяться.
+4. Приложение должно поддерживать устройства iPhone с iOS 17 или выше, предусмотрен только портретный режим.
+5. Все шрифты в приложении — системные, не нужно их скачивать; в Interface Builder это шрифт «System» в выпадающем списке, а при вёрстке из кода — [`systemFont(ofSize:weight:)`](https://developer.apple.com/documentation/uikit/uifont/1619027-systemfont). В текущих версиях iOS (17—26) системный шрифт — это шрифт `SF Pro`, но в будущих версиях он может поменяться.
 
 # Функциональные требования
 
